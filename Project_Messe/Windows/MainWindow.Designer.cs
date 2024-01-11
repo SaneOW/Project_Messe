@@ -37,7 +37,6 @@
             text_Stadt = new TextBox();
             pictureBox1 = new PictureBox();
             button_Picture = new Button();
-            box_Products = new ComboBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -46,7 +45,20 @@
             label6 = new Label();
             label7 = new Label();
             text_Land = new TextBox();
+            radio_Autos_yes = new RadioButton();
+            groupBox1 = new GroupBox();
+            radio_Autos_no = new RadioButton();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            groupbox_Smartphones = new GroupBox();
+            radioButton1 = new RadioButton();
+            radioButton2 = new RadioButton();
+            groupbox_Laptops = new GroupBox();
+            radio_Laptops_no = new RadioButton();
+            radio_Laptops_yes = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            groupBox1.SuspendLayout();
+            groupbox_Smartphones.SuspendLayout();
+            groupbox_Laptops.SuspendLayout();
             SuspendLayout();
             // 
             // button_Speichern
@@ -118,14 +130,6 @@
             button_Picture.Text = "Foto aufnehmen";
             button_Picture.UseVisualStyleBackColor = true;
             // 
-            // box_Products
-            // 
-            box_Products.FormattingEnabled = true;
-            box_Products.Location = new Point(85, 217);
-            box_Products.Name = "box_Products";
-            box_Products.Size = new Size(121, 23);
-            box_Products.TabIndex = 9;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -196,12 +200,114 @@
             text_Land.Size = new Size(100, 23);
             text_Land.TabIndex = 17;
             // 
+            // radio_Autos_yes
+            // 
+            radio_Autos_yes.AutoSize = true;
+            radio_Autos_yes.Location = new Point(7, 22);
+            radio_Autos_yes.Name = "radio_Autos_yes";
+            radio_Autos_yes.Size = new Size(35, 19);
+            radio_Autos_yes.TabIndex = 18;
+            radio_Autos_yes.TabStop = true;
+            radio_Autos_yes.Text = "Ja";
+            radio_Autos_yes.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(radio_Autos_no);
+            groupBox1.Controls.Add(radio_Autos_yes);
+            groupBox1.Location = new Point(85, 222);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(139, 50);
+            groupBox1.TabIndex = 23;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Autos";
+            // 
+            // radio_Autos_no
+            // 
+            radio_Autos_no.AutoSize = true;
+            radio_Autos_no.Location = new Point(61, 22);
+            radio_Autos_no.Name = "radio_Autos_no";
+            radio_Autos_no.Size = new Size(50, 19);
+            radio_Autos_no.TabIndex = 19;
+            radio_Autos_no.TabStop = true;
+            radio_Autos_no.Text = "Nein";
+            radio_Autos_no.UseVisualStyleBackColor = true;
+            // 
+            // groupbox_Smartphones
+            // 
+            groupbox_Smartphones.Controls.Add(radioButton1);
+            groupbox_Smartphones.Controls.Add(radioButton2);
+            groupbox_Smartphones.Location = new Point(86, 334);
+            groupbox_Smartphones.Name = "groupbox_Smartphones";
+            groupbox_Smartphones.Size = new Size(138, 50);
+            groupbox_Smartphones.TabIndex = 24;
+            groupbox_Smartphones.TabStop = false;
+            groupbox_Smartphones.Text = "Smartphones";
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(60, 22);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(50, 19);
+            radioButton1.TabIndex = 29;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Nein";
+            radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            radioButton2.AutoSize = true;
+            radioButton2.Location = new Point(6, 22);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(35, 19);
+            radioButton2.TabIndex = 28;
+            radioButton2.TabStop = true;
+            radioButton2.Text = "Ja";
+            radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // groupbox_Laptops
+            // 
+            groupbox_Laptops.Controls.Add(radio_Laptops_no);
+            groupbox_Laptops.Controls.Add(radio_Laptops_yes);
+            groupbox_Laptops.Location = new Point(86, 278);
+            groupbox_Laptops.Name = "groupbox_Laptops";
+            groupbox_Laptops.Size = new Size(138, 50);
+            groupbox_Laptops.TabIndex = 25;
+            groupbox_Laptops.TabStop = false;
+            groupbox_Laptops.Text = "Laptops";
+            // 
+            // radio_Laptops_no
+            // 
+            radio_Laptops_no.AutoSize = true;
+            radio_Laptops_no.Location = new Point(60, 22);
+            radio_Laptops_no.Name = "radio_Laptops_no";
+            radio_Laptops_no.Size = new Size(50, 19);
+            radio_Laptops_no.TabIndex = 27;
+            radio_Laptops_no.TabStop = true;
+            radio_Laptops_no.Text = "Nein";
+            radio_Laptops_no.UseVisualStyleBackColor = true;
+            // 
+            // radio_Laptops_yes
+            // 
+            radio_Laptops_yes.AutoSize = true;
+            radio_Laptops_yes.Location = new Point(6, 22);
+            radio_Laptops_yes.Name = "radio_Laptops_yes";
+            radio_Laptops_yes.Size = new Size(35, 19);
+            radio_Laptops_yes.TabIndex = 26;
+            radio_Laptops_yes.TabStop = true;
+            radio_Laptops_yes.Text = "Ja";
+            radio_Laptops_yes.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(800, 450);
+            Controls.Add(groupbox_Laptops);
+            Controls.Add(groupbox_Smartphones);
+            Controls.Add(groupBox1);
             Controls.Add(text_Land);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -210,7 +316,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(box_Products);
             Controls.Add(button_Picture);
             Controls.Add(pictureBox1);
             Controls.Add(text_Stadt);
@@ -223,6 +328,12 @@
             Name = "MainWindow";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupbox_Smartphones.ResumeLayout(false);
+            groupbox_Smartphones.PerformLayout();
+            groupbox_Laptops.ResumeLayout(false);
+            groupbox_Laptops.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -238,7 +349,6 @@
         private TextBox text_Stadt;
         private PictureBox pictureBox1;
         private Button button_Picture;
-        private ComboBox box_Products;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -247,5 +357,16 @@
         private Label label6;
         private Label label7;
         private TextBox text_Land;
+        private RadioButton radio_Autos_yes;
+        private RadioButton radio_Laptops;
+        private GroupBox groupBox1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private GroupBox groupbox_Smartphones;
+        private GroupBox groupbox_Laptops;
+        private RadioButton radio_Autos_no;
+        private RadioButton radio_Laptops_no;
+        private RadioButton radio_Laptops_yes;
+        private RadioButton radioButton1;
+        private RadioButton radioButton2;
     }
 }

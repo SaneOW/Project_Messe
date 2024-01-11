@@ -10,6 +10,7 @@ namespace Project_Messe.Datenbank.Database
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Customer_Product> Customer_Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

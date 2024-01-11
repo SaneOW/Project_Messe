@@ -67,16 +67,32 @@ namespace Project_Messe.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("Project_Messe.Datenbank.DatabaseKlassen.Customer_Product", b =>
+                {
+                    b.Property<int>("ConnectionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CustomerID")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProductID")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ConnectionID");
+
+                    b.ToTable("Customer_Products");
+                });
+
             modelBuilder.Entity("Project_Messe.Datenbank.DatabaseKlassen.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()

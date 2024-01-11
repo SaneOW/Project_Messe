@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 
 namespace Project_Messe.Datenbank.DatabaseKlassen
 {
-    public class Product
+    public class Customer_Product
     {
         [Key]
-        public int ProductId { get; set; }
+        public int ConnectionID { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string Name { get; set; }
+        public string CustomerID { get; set; }
+
+        [StringLength(100)]
+        public string ProductID { get; set; }
 
     }
 }
