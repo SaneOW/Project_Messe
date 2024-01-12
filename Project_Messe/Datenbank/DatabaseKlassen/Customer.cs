@@ -37,8 +37,8 @@ namespace Project_Messe.Datenbank.DatabaseKlassen
         [StringLength(50)]
         public string Country { get; set; }
 
-        [StringLength(300)]
-        public string PhotoPath { get; set; }
+        [Required]
+        public byte[] Picture { get; set; }
 
     }
 }

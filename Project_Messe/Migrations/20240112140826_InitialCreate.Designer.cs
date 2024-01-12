@@ -10,8 +10,8 @@ using Project_Messe.Datenbank.Database;
 namespace Project_Messe.Migrations
 {
     [DbContext(typeof(MesseDbContext))]
-    [Migration("20240111140112_initial")]
-    partial class initial
+    [Migration("20240112140826_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,10 +50,9 @@ namespace Project_Messe.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PhotoPath")
+                    b.Property<byte[]>("Picture")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("BLOB");
 
                     b.Property<string>("PostalCode")
                         .IsRequired()

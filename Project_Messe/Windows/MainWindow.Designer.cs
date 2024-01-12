@@ -35,7 +35,7 @@
             text_Hausnummer = new TextBox();
             text_Postleitzahl = new TextBox();
             text_Stadt = new TextBox();
-            pictureBox1 = new PictureBox();
+            pictureBoxVideo = new PictureBox();
             button_Picture = new Button();
             label1 = new Label();
             label2 = new Label();
@@ -55,7 +55,10 @@
             groupbox_Laptops = new GroupBox();
             radio_Laptops_no = new RadioButton();
             radio_Laptops_yes = new RadioButton();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            comboBoxCameraList = new ComboBox();
+            buttonSelectCamera = new Button();
+            button_retry = new Button();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxVideo).BeginInit();
             groupBox1.SuspendLayout();
             groupbox_Smartphones.SuspendLayout();
             groupbox_Laptops.SuspendLayout();
@@ -113,13 +116,14 @@
             text_Stadt.Size = new Size(213, 23);
             text_Stadt.TabIndex = 6;
             // 
-            // pictureBox1
+            // pictureBoxVideo
             // 
-            pictureBox1.Location = new Point(473, 39);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(302, 172);
-            pictureBox1.TabIndex = 7;
-            pictureBox1.TabStop = false;
+            pictureBoxVideo.Location = new Point(473, 39);
+            pictureBoxVideo.Name = "pictureBoxVideo";
+            pictureBoxVideo.Size = new Size(302, 172);
+            pictureBoxVideo.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxVideo.TabIndex = 7;
+            pictureBoxVideo.TabStop = false;
             // 
             // button_Picture
             // 
@@ -129,6 +133,7 @@
             button_Picture.TabIndex = 8;
             button_Picture.Text = "Foto aufnehmen";
             button_Picture.UseVisualStyleBackColor = true;
+            button_Picture.Click += button_Picture_Click;
             // 
             // label1
             // 
@@ -299,12 +304,44 @@
             radio_Laptops_yes.Text = "Ja";
             radio_Laptops_yes.UseVisualStyleBackColor = true;
             // 
+            // comboBoxCameraList
+            // 
+            comboBoxCameraList.FormattingEnabled = true;
+            comboBoxCameraList.Location = new Point(473, 12);
+            comboBoxCameraList.Name = "comboBoxCameraList";
+            comboBoxCameraList.Size = new Size(121, 23);
+            comboBoxCameraList.TabIndex = 26;
+            // 
+            // buttonSelectCamera
+            // 
+            buttonSelectCamera.Location = new Point(600, 12);
+            buttonSelectCamera.Name = "buttonSelectCamera";
+            buttonSelectCamera.Size = new Size(141, 23);
+            buttonSelectCamera.TabIndex = 27;
+            buttonSelectCamera.Text = "Kamera auswählen";
+            buttonSelectCamera.UseVisualStyleBackColor = true;
+            buttonSelectCamera.Click += buttonSelectCamera_Click_1;
+            // 
+            // button_retry
+            // 
+            button_retry.Location = new Point(569, 229);
+            button_retry.Name = "button_retry";
+            button_retry.Size = new Size(113, 23);
+            button_retry.TabIndex = 28;
+            button_retry.Text = "Erneut versuchen";
+            button_retry.UseVisualStyleBackColor = true;
+            button_retry.Visible = false;
+            button_retry.Click += retry_button_Click;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(800, 450);
+            Controls.Add(button_retry);
+            Controls.Add(buttonSelectCamera);
+            Controls.Add(comboBoxCameraList);
             Controls.Add(groupbox_Laptops);
             Controls.Add(groupbox_Smartphones);
             Controls.Add(groupBox1);
@@ -317,7 +354,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(button_Picture);
-            Controls.Add(pictureBox1);
+            Controls.Add(pictureBoxVideo);
             Controls.Add(text_Stadt);
             Controls.Add(text_Postleitzahl);
             Controls.Add(text_Hausnummer);
@@ -327,7 +364,7 @@
             Controls.Add(button_Speichern);
             Name = "MainWindow";
             Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxVideo).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupbox_Smartphones.ResumeLayout(false);
@@ -347,7 +384,7 @@
         private TextBox text_Hausnummer;
         private TextBox text_Postleitzahl;
         private TextBox text_Stadt;
-        private PictureBox pictureBox1;
+        private PictureBox pictureBoxVideo;
         private Button button_Picture;
         private Label label1;
         private Label label2;
@@ -368,5 +405,8 @@
         private RadioButton radio_Laptops_yes;
         private RadioButton radioButton1;
         private RadioButton radioButton2;
+        private ComboBox comboBoxCameraList;
+        private Button buttonSelectCamera;
+        private Button button_retry;
     }
 }

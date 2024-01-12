@@ -5,7 +5,7 @@
 namespace Project_Messe.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,7 +37,7 @@ namespace Project_Messe.Migrations
                     City = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     PostalCode = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     Country = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    PhotoPath = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false)
+                    Picture = table.Column<byte[]>(type: "BLOB", nullable: false)
                 },
                 constraints: table =>
                 {

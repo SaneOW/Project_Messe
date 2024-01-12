@@ -47,10 +47,9 @@ namespace Project_Messe.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PhotoPath")
+                    b.Property<byte[]>("Picture")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("BLOB");
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
