@@ -9,15 +9,11 @@ namespace Project_Messe.Datenbank.DatabaseKlassen
 {
     public class Customer_Product
     {
-        [Key]
-        public int ConnectionID { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string CustomerID { get; set; }
-
-        [StringLength(100)]
-        public string ProductID { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
 
     }
 }

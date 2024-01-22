@@ -11,7 +11,6 @@ namespace Project_Messe.Datenbank.DatabaseKlassen
     public class Customer
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CustomerId { get; set; }
 
         [Required]
@@ -39,6 +38,8 @@ namespace Project_Messe.Datenbank.DatabaseKlassen
 
         [Required]
         public byte[] Picture { get; set; }
+
+        public ICollection<Customer_Product> CustomerProducts { get; set; } = new List<Customer_Product>();
 
     }
 }

@@ -51,7 +51,7 @@
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             groupbox_Smartphones = new GroupBox();
             radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
+            radio_Smartphones = new RadioButton();
             groupbox_Laptops = new GroupBox();
             radio_Laptops_no = new RadioButton();
             radio_Laptops_yes = new RadioButton();
@@ -241,7 +241,7 @@
             // groupbox_Smartphones
             // 
             groupbox_Smartphones.Controls.Add(radioButton1);
-            groupbox_Smartphones.Controls.Add(radioButton2);
+            groupbox_Smartphones.Controls.Add(radio_Smartphones);
             groupbox_Smartphones.Location = new Point(86, 334);
             groupbox_Smartphones.Name = "groupbox_Smartphones";
             groupbox_Smartphones.Size = new Size(138, 50);
@@ -260,16 +260,16 @@
             radioButton1.Text = "Nein";
             radioButton1.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // radio_Smartphones
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(6, 22);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(35, 19);
-            radioButton2.TabIndex = 28;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Ja";
-            radioButton2.UseVisualStyleBackColor = true;
+            radio_Smartphones.AutoSize = true;
+            radio_Smartphones.Location = new Point(6, 22);
+            radio_Smartphones.Name = "radio_Smartphones";
+            radio_Smartphones.Size = new Size(35, 19);
+            radio_Smartphones.TabIndex = 28;
+            radio_Smartphones.TabStop = true;
+            radio_Smartphones.Text = "Ja";
+            radio_Smartphones.UseVisualStyleBackColor = true;
             // 
             // groupbox_Laptops
             // 
@@ -404,7 +404,7 @@
         private RadioButton radio_Laptops_no;
         private RadioButton radio_Laptops_yes;
         private RadioButton radioButton1;
-        private RadioButton radioButton2;
+        private RadioButton radio_Smartphones;
         private ComboBox comboBoxCameraList;
         private Button buttonSelectCamera;
         private Button button_retry;

@@ -46,6 +46,19 @@ namespace Project_Messe
                 Picture = ImageToByteArray(currentFrame) // Hier wird das Bild als Byte-Array gespeichert
             };
 
+            if (radio_Autos_yes.Checked)
+            {
+                customer.CustomerProducts.Add(new Customer_Product { ProductId = 1});
+            }
+            if (radio_Laptops_yes.Checked)
+            {
+                customer.CustomerProducts.Add(new Customer_Product { ProductId = 2});
+            }
+            if (radio_Smartphones.Checked) // Assuming radioButton2 is for Smartphones 'Yes'
+            {
+                customer.CustomerProducts.Add(new Customer_Product { ProductId = 3 });
+            }
+
             // Daten in der Datenbank speichern
             using (var context = new MesseDbContext())
             {
@@ -165,7 +178,7 @@ namespace Project_Messe
             buttonSelectCamera_Click_1(sender, e);
             button_retry.Visible = false;
             button_Picture.Visible = true;
-            
+
 
         }
     }

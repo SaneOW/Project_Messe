@@ -10,8 +10,8 @@ using Project_Messe.Datenbank.Database;
 namespace Project_Messe.Migrations
 {
     [DbContext(typeof(MesseDbContext))]
-    [Migration("20240112140826_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240122112854_UpdatedDb")]
+    partial class UpdatedDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,21 +71,15 @@ namespace Project_Messe.Migrations
 
             modelBuilder.Entity("Project_Messe.Datenbank.DatabaseKlassen.Customer_Product", b =>
                 {
-                    b.Property<int>("ConnectionID")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("CustomerId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("CustomerID")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProductID")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                    b.HasKey("CustomerId", "ProductId");
 
-                    b.HasKey("ConnectionID");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Customer_Products");
                 });
@@ -96,14 +90,59 @@ namespace Project_Messe.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("ProductName")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            ProductName = "Autos"
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            ProductName = "Smartphones"
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            ProductName = "Laptops"
+                        });
+                });
+
+            modelBuilder.Entity("Project_Messe.Datenbank.DatabaseKlassen.Customer_Product", b =>
+                {
+                    b.HasOne("Project_Messe.Datenbank.DatabaseKlassen.Customer", "Customer")
+                        .WithMany("CustomerProducts")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Project_Messe.Datenbank.DatabaseKlassen.Product", "Product")
+                        .WithMany("CustomerProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Project_Messe.Datenbank.DatabaseKlassen.Customer", b =>
+                {
+                    b.Navigation("CustomerProducts");
+                });
+
+            modelBuilder.Entity("Project_Messe.Datenbank.DatabaseKlassen.Product", b =>
+                {
+                    b.Navigation("CustomerProducts");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,28 +2,16 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Project_Messe.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class UpdatedDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Customer_Products",
-                columns: table => new
-                {
-                    ConnectionID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CustomerID = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    ProductID = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customer_Products", x => x.ConnectionID);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
@@ -50,12 +38,51 @@ namespace Project_Messe.Migrations
                 {
                     ProductId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
+                    ProductName = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.ProductId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Customer_Products",
+                columns: table => new
+                {
+                    CustomerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customer_Products", x => new { x.CustomerId, x.ProductId });
+                    table.ForeignKey(
+                        name: "FK_Customer_Products_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Customer_Products_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "ProductName" },
+                values: new object[,]
+                {
+                    { 1, "Autos" },
+                    { 2, "Smartphones" },
+                    { 3, "Laptops" }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customer_Products_ProductId",
+                table: "Customer_Products",
+                column: "ProductId");
         }
 
         /// <inheritdoc />
