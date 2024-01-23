@@ -58,6 +58,7 @@
             comboBoxCameraList = new ComboBox();
             buttonSelectCamera = new Button();
             button_retry = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBoxVideo).BeginInit();
             groupBox1.SuspendLayout();
             groupbox_Smartphones.SuspendLayout();
@@ -66,9 +67,9 @@
             // 
             // button_Speichern
             // 
-            button_Speichern.Location = new Point(666, 388);
+            button_Speichern.Location = new Point(653, 361);
             button_Speichern.Name = "button_Speichern";
-            button_Speichern.Size = new Size(75, 23);
+            button_Speichern.Size = new Size(122, 23);
             button_Speichern.TabIndex = 0;
             button_Speichern.Text = "Speichern";
             button_Speichern.UseVisualStyleBackColor = true;
@@ -333,12 +334,23 @@
             button_retry.Visible = false;
             button_retry.Click += retry_button_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(653, 402);
+            button1.Name = "button1";
+            button1.Size = new Size(122, 23);
+            button1.TabIndex = 29;
+            button1.Text = "Switch to data view window";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(800, 450);
+            Controls.Add(button1);
             Controls.Add(button_retry);
             Controls.Add(buttonSelectCamera);
             Controls.Add(comboBoxCameraList);
@@ -408,5 +420,6 @@
         private ComboBox comboBoxCameraList;
         private Button buttonSelectCamera;
         private Button button_retry;
+        private Button button1;
     }
 }

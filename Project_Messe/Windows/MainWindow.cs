@@ -2,6 +2,7 @@ using AForge.Video;
 using AForge.Video.DirectShow;
 using Project_Messe.Datenbank.DatabaseKlassen;
 using Project_Messe.Datenbank.Context;
+using Project_Messe.Windows;
 
 namespace Project_Messe
 {
@@ -48,34 +49,34 @@ namespace Project_Messe
             };
             using (var context = new MesseDbContext())
             {
-                
+
                 // Produkte basierend auf der Auswahl der Radio-Buttons hinzufügen
                 if (radio_Smartphones.Checked)
-            {
-                var smartphoneProduct = context.Products.FirstOrDefault(p => p.ProductName == "Smartphones");
+                {
+                    var smartphoneProduct = context.Products.FirstOrDefault(p => p.ProductName == "Smartphones");
                     if (smartphoneProduct != null)
-                {
-                    customer.Products.Add(smartphoneProduct);
+                    {
+                        customer.Products.Add(smartphoneProduct);
+                    }
                 }
-            }
 
-            if (radio_Laptops_yes.Checked)
-            {
-                var laptopProduct = context.Products.FirstOrDefault(p => p.ProductName == "Laptops");
+                if (radio_Laptops_yes.Checked)
+                {
+                    var laptopProduct = context.Products.FirstOrDefault(p => p.ProductName == "Laptops");
                     if (laptopProduct != null)
-                {
-                    customer.Products.Add(laptopProduct);
+                    {
+                        customer.Products.Add(laptopProduct);
+                    }
                 }
-            }
 
-            if (radio_Autos_yes.Checked)
-            {
-                var autoProduct = context.Products.FirstOrDefault(p => p.ProductName == "Autos");
-                    if (autoProduct != null)
+                if (radio_Autos_yes.Checked)
                 {
-                    customer.Products.Add(autoProduct);
+                    var autoProduct = context.Products.FirstOrDefault(p => p.ProductName == "Autos");
+                    if (autoProduct != null)
+                    {
+                        customer.Products.Add(autoProduct);
+                    }
                 }
-            }
 
                 // Daten in der Datenbank speichern
                 context.Customers.Add(customer);
@@ -204,6 +205,12 @@ namespace Project_Messe
             button_Picture.Visible = true;
 
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Login().ShowDialog();
         }
     }
 }

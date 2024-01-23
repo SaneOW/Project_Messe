@@ -1,4 +1,5 @@
-﻿using Project_Messe.Dto;
+﻿using Newtonsoft.Json;
+using Project_Messe.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +24,47 @@ namespace Project_Messe.Services
             var response = await _httpClient.PostAsJsonAsync("api/Customers", customerDto);
             response.EnsureSuccessStatusCode(); // Wirft eine Ausnahme, wenn der HTTP-Statuscode im Fehlerbereich ist
 
-            // Optional: Rückgabe der Antwort oder anderer Daten
-            // var createdCustomer = await response.Content.ReadFromJsonAsync<CustomerDto>();
-            // return createdCustomer;
+
         }
+        public async Task<List<CustomerDto>> GetCustomerDataAsync()
+        {
+            using (var client = new HttpClient())
+            {
+                string url = "http://localhost:5042/api/Customers"; // URL der API anpassen
+                var response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonString = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<CustomerDto>>(jsonString);
+                }
+                else
+                {
+                    // Fehlerbehandlung, wenn API nicht erfolgreich ist
+                    throw new InvalidOperationException(response.ReasonPhrase);
+                }
+            }
+        }
+        public async Task<List<CustomerDto>> SearchCustomerByNameAsync(string name)
+        {
+            string url = $"http://localhost:5042/api/Customers/search?name={Uri.EscapeDataString(name)}"; // URL der API anpassen
+
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonString = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<CustomerDto>>(jsonString);
+                }
+                else
+                {
+                    // Fehlerbehandlung, wenn API nicht erfolgreich ist
+                    throw new InvalidOperationException(response.ReasonPhrase);
+                }
+            }
+        }
+
     }
 }
