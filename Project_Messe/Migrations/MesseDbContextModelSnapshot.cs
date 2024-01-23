@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Project_Messe.Datenbank.Database;
+using Project_Messe.Datenbank.Context;
 
 #nullable disable
 
@@ -15,6 +15,21 @@ namespace Project_Messe.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
+
+            modelBuilder.Entity("CustomerProduct", b =>
+                {
+                    b.Property<int>("CustomersCustomerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProductsProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("CustomersCustomerId", "ProductsProductId");
+
+                    b.HasIndex("ProductsProductId");
+
+                    b.ToTable("CustomerProducts", (string)null);
+                });
 
             modelBuilder.Entity("Project_Messe.Datenbank.DatabaseKlassen.Customer", b =>
                 {
@@ -66,21 +81,6 @@ namespace Project_Messe.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Project_Messe.Datenbank.DatabaseKlassen.Customer_Product", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("CustomerId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Customer_Products");
-                });
-
             modelBuilder.Entity("Project_Messe.Datenbank.DatabaseKlassen.Product", b =>
                 {
                     b.Property<int>("ProductId")
@@ -89,6 +89,7 @@ namespace Project_Messe.Migrations
 
                     b.Property<string>("ProductName")
                         .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.HasKey("ProductId");
@@ -113,33 +114,19 @@ namespace Project_Messe.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Project_Messe.Datenbank.DatabaseKlassen.Customer_Product", b =>
+            modelBuilder.Entity("CustomerProduct", b =>
                 {
-                    b.HasOne("Project_Messe.Datenbank.DatabaseKlassen.Customer", "Customer")
-                        .WithMany("CustomerProducts")
-                        .HasForeignKey("CustomerId")
+                    b.HasOne("Project_Messe.Datenbank.DatabaseKlassen.Customer", null)
+                        .WithMany()
+                        .HasForeignKey("CustomersCustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Project_Messe.Datenbank.DatabaseKlassen.Product", "Product")
-                        .WithMany("CustomerProducts")
-                        .HasForeignKey("ProductId")
+                    b.HasOne("Project_Messe.Datenbank.DatabaseKlassen.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Project_Messe.Datenbank.DatabaseKlassen.Customer", b =>
-                {
-                    b.Navigation("CustomerProducts");
-                });
-
-            modelBuilder.Entity("Project_Messe.Datenbank.DatabaseKlassen.Product", b =>
-                {
-                    b.Navigation("CustomerProducts");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,4 @@
-
+using Project_Messe.Windows;
 namespace Project_Messe
 {
     internal static class Program
@@ -9,10 +9,15 @@ namespace Project_Messe
         [STAThread]
         static void Main()
         {
+            
+
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+            
+            Application.Run(new WorkerWindow());
             Application.Run(new MainWindow());
         }
+
     }
 }

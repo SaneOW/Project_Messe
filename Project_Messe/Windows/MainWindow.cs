@@ -1,7 +1,7 @@
 using AForge.Video;
 using AForge.Video.DirectShow;
-using Project_Messe.Datenbank.Database;
 using Project_Messe.Datenbank.DatabaseKlassen;
+using Project_Messe.Datenbank.Context;
 
 namespace Project_Messe
 {
@@ -43,32 +43,59 @@ namespace Project_Messe
                 PostalCode = text_Postleitzahl.Text,
                 Country = text_Land.Text,
                 HouseNumber = text_Hausnummer.Text,
-                Picture = ImageToByteArray(currentFrame) // Hier wird das Bild als Byte-Array gespeichert
+                Picture = ImageToByteArray(currentFrame), // Hier wird das Bild als Byte-Array gespeichert
+                Products = new List<Product>() // Initialisieren Sie die Produktliste
             };
+            using (var context = new MesseDbContext())
+            {
+                
+                // Produkte basierend auf der Auswahl der Radio-Buttons hinzufügen
+                if (radio_Smartphones.Checked)
+            {
+                var smartphoneProduct = context.Products.FirstOrDefault(p => p.ProductName == "Smartphones");
+                    if (smartphoneProduct != null)
+                {
+                    customer.Products.Add(smartphoneProduct);
+                }
+            }
+
+            if (radio_Laptops_yes.Checked)
+            {
+                var laptopProduct = context.Products.FirstOrDefault(p => p.ProductName == "Laptops");
+                    if (laptopProduct != null)
+                {
+                    customer.Products.Add(laptopProduct);
+                }
+            }
 
             if (radio_Autos_yes.Checked)
             {
-                customer.CustomerProducts.Add(new Customer_Product { ProductId = 1});
-            }
-            if (radio_Laptops_yes.Checked)
-            {
-                customer.CustomerProducts.Add(new Customer_Product { ProductId = 2});
-            }
-            if (radio_Smartphones.Checked) // Assuming radioButton2 is for Smartphones 'Yes'
-            {
-                customer.CustomerProducts.Add(new Customer_Product { ProductId = 3 });
+                var autoProduct = context.Products.FirstOrDefault(p => p.ProductName == "Autos");
+                    if (autoProduct != null)
+                {
+                    customer.Products.Add(autoProduct);
+                }
             }
 
-            // Daten in der Datenbank speichern
-            using (var context = new MesseDbContext())
-            {
+                // Daten in der Datenbank speichern
                 context.Customers.Add(customer);
                 context.SaveChanges();
+
             }
 
             // Bestätigung anzeigen
             MessageBox.Show("Kundendaten gespeichert!");
         }
+
+        // Diese Methode holt das Produkt anhand des Namens aus der Datenbank.
+        private Product GetProductByName(string productName)
+        {
+            using (var context = new MesseDbContext())
+            {
+                return context.Products.FirstOrDefault(p => p.ProductName == productName);
+            }
+        }
+
 
         // Diese Methode konvertiert eine Bitmap in ein Byte-Array
         private byte[] ImageToByteArray(Bitmap image)
@@ -93,14 +120,11 @@ namespace Project_Messe
 
         private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            // Da dieses Ereignis in einem separaten Thread aufgerufen wird, müssen Sie sicherstellen,
-            // dass Sie auf die PictureBox in einem threadsicheren Weg zugreifen
+
             if (pictureBoxVideo.InvokeRequired)
             {
                 pictureBoxVideo.Invoke(new MethodInvoker(delegate
                 {
-                    // Erstellen Sie eine Kopie des neuen Frames aus dem Event-Argument
-                    // und setzen Sie es als Bild für die PictureBox
                     pictureBoxVideo.Image?.Dispose(); // Vorheriges Bild freigeben, um Speicherlecks zu vermeiden
                     Bitmap frame = (Bitmap)eventArgs.Frame.Clone();
                     pictureBoxVideo.Image = frame;

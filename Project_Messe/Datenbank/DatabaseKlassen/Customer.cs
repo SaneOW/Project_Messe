@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Project_Messe.Datenbank.DatabaseKlassen
 {
@@ -39,10 +35,7 @@ namespace Project_Messe.Datenbank.DatabaseKlassen
         [Required]
         public byte[] Picture { get; set; }
 
-        public ICollection<Customer_Product> CustomerProducts { get; set; } = new List<Customer_Product>();
-
+        // Many-to-Many relationship with Product
+        public List<Product> Products { get; set; }
     }
 }
-
-
-
